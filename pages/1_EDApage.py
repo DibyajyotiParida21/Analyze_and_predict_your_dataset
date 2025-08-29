@@ -33,7 +33,7 @@ if uploaded_file is not None:
         # 🔹 Ask user what percentage of dataset to keep
         st.write("### 📌 Dataset Sampling")
         perc = st.slider("Select percentage of records to keep:", 10, 100, 100, step=10)
-        if perc < 100:
+        if perc < 100 and st.button("Apply changes"):
             n_rows = int(len(st.session_state.df) * (perc / 100))
             st.session_state.df = st.session_state.df.sample(n=n_rows, random_state=42).reset_index(drop=True)
             st.info(f"Using {perc}% of dataset ({n_rows} rows).")
@@ -252,4 +252,5 @@ if uploaded_file is not None:
         st.error("❌ Please kindly enter a CSV file")
 else:
     st.warning("⚠️ No file uploaded yet")
+
 
